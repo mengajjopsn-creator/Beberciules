@@ -1,4 +1,5 @@
 export const gameVisuals = {
+ oca: {label:'Tablero y dados',color:'lime',detail:'De oca a oca, con vuestro grupo'},
  mix: {label:'La mezcla',color:'lime',detail:'Todos los juegos, una noche'},
  vote: {label:'Votación secreta',color:'lime',detail:'Señala y descubre'},
  paranoia: {label:'Pregunta secreta',color:'violet',detail:'Solo uno sabe la pregunta'},

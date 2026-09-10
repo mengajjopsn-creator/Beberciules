@@ -96,7 +96,7 @@ test('Salir durante la votación del infiltrado invalida los votos a quien se fu
 });
 
 test('La mezcla no repite juego seguido y todos los modos terminan con respuestas reales',()=>{
- for(const mode of modes){
+ for(const mode of modes.filter(m=>m.id!=='oca')){
   const {room,players:p}=setup(mode.id);let previous;
   for(let n=0;n<10;n++){
    if(mode.id==='mix')assert.notEqual(room.round.type,previous);previous=room.round.type;
@@ -133,7 +133,7 @@ for(const type of ['speed','defend'])test(type+': cronómetro, votación y punto
 test('Notas de cero a diez y validación del rango',()=>{const {room,players:p}=setup('ten');assert.throws(()=>answer(room,p[0],'11'));answer(room,p[0],'10');answer(room,p[1],'0');answer(room,p[2],'pass');assert.equal(room.round.result.average,5);});
 test('Votos no se duplican; rechaza autovotos y acciones de no anfitriones',()=>{const {room,players:p}=setup('vote');assert.throws(()=>answer(room,p[0],p[0].id));assert.throws(()=>act(room,p[1],'next'));answer(room,p[0],p[1].id);answer(room,p[0],p[2].id);assert.equal(room.round.answers[p[0].id],p[1].id);assert.throws(()=>mutate(room,p[0],'answer',{roundId:'anterior',value:p[1].id}));});
 test('Entrada tardía espera a la siguiente ronda; salida del anfitrión transfiere control',()=>{const {room,players:p}=setup('paranoia');mutate(room,null,'join',{name:'Nueva',token:token()});assert.equal(view(room,room.players[3]).round.participant,false);act(room,p[0],'leave');assert.equal(room.host,p[1].id);assert.equal(room.round.stage,'results');act(room,p[1],'next');assert.equal(room.round.participants.length,3);});
-test('Los diez modos pueden completar diez rondas sin bloqueo',()=>{for(const mode of modes){const {room}=setup(mode.id);for(let round=1;round<=10;round++){let safety=0;while(room.round.stage!=='results'&&safety++<8){if(room.round.stage==='perform'){const actor=room.players.find(p=>p.id===room.round.actor);act(room,actor,'done',{skip:true});}else for(const p of room.players){if(view(room,p).round.canAnswer)answer(room,p,'pass');}}assert.equal(room.round.stage,'results',mode.id);act(room,room.players[0],'next');}assert.equal(room.phase,'finished',mode.id);}});
+test('Los diez modos pueden completar diez rondas sin bloqueo',()=>{for(const mode of modes.filter(m=>m.id!=='oca')){const {room}=setup(mode.id);for(let round=1;round<=10;round++){let safety=0;while(room.round.stage!=='results'&&safety++<8){if(room.round.stage==='perform'){const actor=room.players.find(p=>p.id===room.round.actor);act(room,actor,'done',{skip:true});}else for(const p of room.players){if(view(room,p).round.canAnswer)answer(room,p,'pass');}}assert.equal(room.round.stage,'results',mode.id);act(room,room.players[0],'next');}assert.equal(room.phase,'finished',mode.id);}});
 test('Autenticación por token y motes únicos',()=>{const {room}=setup();assert.throws(()=>authenticate(room,token()));assert.throws(()=>mutate(room,null,'join',{name:'persona 1',token:token()}));});
 test('API: salas sincronizadas, escrituras simultáneas y reintentos idempotentes',async()=>{
  const server=createServer(handler);await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));

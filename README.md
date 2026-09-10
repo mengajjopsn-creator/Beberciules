@@ -1,6 +1,6 @@
 # BEBERCIULES
 
-Juego de previa para adultos, diseñado primero para móvil. Cada persona entra con su nombre o mote. Quien crea la sala comparte el enlace y elige uno de diez juegos. Hasta 20 participantes, diez rondas por partida y tres intensidades.
+Juego de previa para adultos, diseñado primero para móvil. Cada persona entra con su nombre o mote. Quien crea la sala comparte el enlace y elige uno de once juegos. Hasta 20 participantes: diez modalidades de rondas y una oca con tablero propio.
 
 ## Publicar con GitHub, Vercel y Supabase
 
@@ -27,6 +27,7 @@ La sincronización se consulta cada 2,5 segundos con la pestaña visible. Son pe
 
 | Nombre | Mecánica |
 | --- | --- |
+| La oca | Tablero de la foto: 50 pruebas y meta, dado, fichas y turnos compartidos. |
 | Modo previa | Mezcla aleatoria de los modos disponibles según el grupo. |
 | El señalado | Votos ocultos hasta el cierre; se revelan destinatarios, votantes y empates. |
 | Bajo cuerda | Solo quien tiene turno recibe la pregunta; el servidor sortea si la revela al grupo. |
@@ -86,6 +87,16 @@ Referencias oficiales: https://vercel.com/docs/functions/runtimes/node-js , http
 
 Logo propio: una B formada por dos vasos brindando, en verde lima, violeta y rosa. Se usa en la cabecera, la entrada y los favicons PNG/ICO; también se incluye un icono Apple Touch. El logo original está en `public/assets/brand/logo.png`.
 
-Cada juego tiene una ilustración 3D original en `public/assets/games/`. Se reutiliza en sus preguntas y retos para reconocer la modalidad; no se genera una imagen por cada pregunta de la batería. Las diez imágenes WebP suman aproximadamente 184 KB, y las tarjetas fuera de la primera pantalla usan carga diferida. Los prompts y archivos están documentados en `docs/visual-assets.json`; se usó la herramienta integrada de generación de imágenes.
+Cada juego tiene una ilustración 3D original en `public/assets/games/`. Se reutiliza en sus preguntas y retos para reconocer la modalidad; no se genera una imagen por cada pregunta de la batería. Las once imágenes WebP están optimizadas para móvil, y las tarjetas fuera de la primera pantalla usan carga diferida. Los prompts y archivos están documentados en `docs/visual-assets.json`; se usó la herramienta integrada de generación de imágenes.
 
 La interfaz permite elegir claramente entre crear sala y unirse, muestra participantes con iniciales, tarjetas ilustradas, el juego seleccionado junto al botón de inicio, progreso de diez rondas y controles adaptados al móvil.
+
+## La oca
+
+El recorrido va de salida (0) a meta (51), con 50 pruebas basadas en la foto aportada. Se gana llegando exactamente; el exceso de dado rebota. No se mezcla con los juegos de diez rondas. El servidor genera los dados, la moneda y las diez rondas de botella; cada móvil recibe las mismas fichas y el mismo turno. El duelo permite elegir contrincante y tira un dado por persona.
+
+La casilla 1 repite tirada, las posadas 18 y 29 y la cárcel 31 hacen perder un turno. Los atajos 20→25, 30→35 y 40→45, y los retrocesos 13 y 32 son automáticos. No se añaden saltos de oca ni vuelta a salida en la curva peligrosa: no aparecen en la foto. La moneda de la casilla 28 indica tragos, no desplazamientos. Cambiar de asiento tampoco intercambia fichas. Las pruebas sociales se resuelven en persona.
+
+Se conservan las descripciones y el tono de la foto; los títulos sin instrucciones no se sustituyen por retos inventados. Hidalgo (1 y 26), recta final (50) y tardones (45) no exigen vaciar vasos de golpe. Las casillas 4 y 43 son Modo sexo y Zona segura. Una sola regla general permite pasar y exige contacto acordado.
+
+Quien llega tarde observa hasta la siguiente partida. Si sale quien tiene el turno, pasa a la siguiente ficha; si quedan menos de dos fichas, se vuelve al selector. El anfitrión puede cerrar pruebas o saltar un turno pendiente para evitar bloqueos.

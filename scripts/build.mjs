@@ -12,4 +12,4 @@ for(const mode of modes){
 }
 if(!html.includes('BEBERCIULES'))throw new Error('Falta el nombre de la aplicación.');
 await mkdir('dist',{recursive:true});await cp('public','dist',{recursive:true});
-console.log('BEBERCIULES: sintaxis, logo, favicons y las 10 ilustraciones comprobados. Web preparada en dist/; API en api/.');
+console.log('BEBERCIULES: sintaxis, logo, favicons y las 11 ilustraciones comprobados. Web preparada en dist/; API en api/.');
