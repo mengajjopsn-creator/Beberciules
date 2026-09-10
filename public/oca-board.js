@@ -1,7 +1,7 @@
 // Transcripción de la foto. Hidalgo y tardones no exigen vaciar vasos de golpe.
 const entries=[
  ['Salida','Colocad las fichas en la salida.','flag'],
- ['Patético','¿1? Vuelve a tirar, pedazo de mierda. Ah, y hazte un brindis.','dice',{repeat:true}],
+ ['Patético','¿1? Vuelve a tirar, pedazo de mierda. Ah, y da un trago.','dice',{repeat:true}],
  ['2 tragos','Dos tragos, por pringadx.','cup'],
  ['Hielo para tres','Con las personas de tu derecha e izquierda, mantened un hielo entre las bocas durante 30 segundos. Si se cae, tres tragos cada uno.','ice'],
  ['Modo sexo','Modo sexo.','fire'],
@@ -26,7 +26,7 @@ const entries=[
  ['Confesión','Confesión.','chat'],
  ['¡Beso, chaval!','Se hace un chinchín dos veces entre todos los jugadores. Los dos ganadores se besan.','heart'],
  ['Story time','Story time.','book'],
- ['Se acabó el descanso','Se acabó el descanso: toca un brindis.','cup'],
+ ['Se acabó el descanso','Se acabó el descanso: toca un trago.','cup'],
  ['¡Regalo!','Has ganado un striptease de dos personas a tu elección.','gift'],
  ['Flip a coin','Cara: dos tragos. Cruz: un trago.','coin',{coin:true}],
  ['Posada','Posada: pierdes el siguiente turno.','rest',{skip:1}],
@@ -50,7 +50,7 @@ const entries=[
  ['Curva peligrosa y control','Todo el grupo pasa las pruebas de equilibrio y de «alcoholemia». Quien no las supere, bebe. ¡Ojo! No se salva de la multa.','eye'],
  ['Kiss or slap','Kiss or slap con la persona de tu izquierda.','heart'],
  ['Beso al de la derecha','Beso al de la derecha.','heart'],
- ['Recta final','Recta final: un brindis antes de entrar.','flag'],
+ ['Recta final','Recta final: un trago antes de entrar.','flag'],
  ['Has ganado','¡Has ganado!','flag']
 ];
 export const gooseSquares=[]; // La foto no tiene saltos de oca.
