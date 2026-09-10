@@ -12,7 +12,7 @@ export function renderRoundResults(r,players){
  const abstentions=()=>panel(group('Han pasado','pass')+group('Sin responder',null));
  const voters=value=>names(ballots.filter(b=>b.value===value).map(b=>b.id));
  if(result.skipped)return note('Ronda pasada. Vamos a por otra.');
- if(r.type==='never')return panel(group('Sí, lo han hecho','yes')+group('Yo nunca','no'))+abstentions()+note('¿Quién quiere contar la historia? Compartir los detalles es opcional.');
+ if(r.type==='never')return panel(group('Sí, lo han hecho','yes')+group('Yo nunca','no'))+abstentions()+note('¿Quién quiere contar la historia?');
  if(r.type==='match')return result.pairs.length?panel(result.pairs.map(pair=>row(`${name(pair[0])} + ${name(pair[1])}`,'¡MATCH!')).join(''))+note('Habéis coincidido. ¿Os sorprende? Las demás elecciones siguen siendo privadas.'):note('No hubo matches esta ronda. Las demás elecciones siguen siendo privadas.');
  if(r.type==='paranoia')return `<div class="card"><span class="tag">${name(r.actor)} ELIGIÓ A…</span><h2 class="question">${result.target?name(result.target):'Nadie'}</h2><p>${!result.target?'Turno sin elección.':result.showQuestion?'La moneda ha decidido revelar la pregunta. ¿Por qué esa persona?':'La moneda ha decidido guardar el secreto. Podéis especular, pero la pregunta sigue bajo llave.'}</p></div>`;
  if(r.type==='ten'){

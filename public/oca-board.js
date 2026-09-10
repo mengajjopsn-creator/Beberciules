@@ -56,5 +56,5 @@ const entries=[
 export const gooseSquares=[]; // La foto no tiene saltos de oca.
 export const ocaCells=entries.map(([title,text,icon,effect={}],id)=>({id,title,text,icon,...effect}));
 export const ocaGoal=ocaCells.length-1;
-export const ocaRules='Un dado de 1 a 6. Recorre las 50 pruebas y llega a «Has ganado» (51). Si te pasas, rebotas. La casilla 1 permite repetir tirada. Posadas y cárcel: un turno fuera. Los atajos no encadenan pruebas. La moneda reparte tragos, no mueve fichas. Los cambios de asiento tampoco cambian las fichas. Quien entra tarde observa hasta la próxima partida. Regla del grupo: se puede pasar; cualquier contacto es acordado y cada uno elige su bebida.';
+export const ocaRules='Un dado de 1 a 6. Recorre las 50 pruebas y llega a «Has ganado» (51). Si te pasas, rebotas. La casilla 1 permite repetir tirada. Posadas y cárcel: un turno fuera. Los atajos no encadenan pruebas. La moneda reparte tragos, no mueve fichas. Los cambios de asiento tampoco cambian las fichas. Quien entra tarde observa hasta la próxima partida.';
 

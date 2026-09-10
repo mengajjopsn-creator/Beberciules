@@ -97,6 +97,6 @@ El recorrido va de salida (0) a meta (51), con 50 pruebas basadas en la foto apo
 
 La casilla 1 repite tirada, las posadas 18 y 29 y la cárcel 31 hacen perder un turno. Los atajos 20→25, 30→35 y 40→45, y los retrocesos 13 y 32 son automáticos. No se añaden saltos de oca ni vuelta a salida en la curva peligrosa: no aparecen en la foto. La moneda de la casilla 28 indica tragos, no desplazamientos. Cambiar de asiento tampoco intercambia fichas. Las pruebas sociales se resuelven en persona.
 
-Se conservan las descripciones y el tono de la foto; los títulos sin instrucciones no se sustituyen por retos inventados. Hidalgo (1 y 26), recta final (50) y tardones (45) no exigen vaciar vasos de golpe. Las casillas 4 y 43 son Modo sexo y Zona segura. Una sola regla general permite pasar y exige contacto acordado.
+Se conservan las descripciones y el tono de la foto; los títulos sin instrucciones no se sustituyen por retos inventados. Hidalgo (1 y 26), recta final (50) y tardones (45) no exigen vaciar vasos de golpe. Las casillas 4 y 43 son Modo sexo y Zona segura.
 
 Quien llega tarde observa hasta la siguiente partida. Si sale quien tiene el turno, pasa a la siguiente ficha; si quedan menos de dos fichas, se vuelve al selector. El anfitrión puede cerrar pruebas o saltar un turno pendiente para evitar bloqueos.
