@@ -4,7 +4,7 @@ import {gameVisuals, artwork} from './visuals.js';
 const app=document.querySelector('#app');
 const notice=document.querySelector('#notice');
 const entrance=app.innerHTML;
-let state=null,busy=false,polling=false,noticeTimer,selectedInvite=false,networkFailures=0,timerEnding=false,entryMode='create',selectedOcaCell=null;
+let state=null,busy=false,polling=false,noticeTimer,selectedInvite=false,networkFailures=0,timerEnding=false,entryMode='create',selectedOcaCell=null,ocaZoom=false;
 const drafts=new Map();
 let session;
 try{session=JSON.parse(sessionStorage.getItem('beberciules-session')||'null');}catch{}
@@ -45,7 +45,7 @@ function render(){
   const selected=state.modes.find(m=>m.id===state.selected);
   app.innerHTML=header+`<div class="players" aria-label="Participantes">${p.map(x=>`<span class="player ${x.id===state.me?'me':''}"><span class="avatar" aria-hidden="true">${esc(x.name.slice(0,2).toUpperCase())}</span><span>${esc(x.name)}${x.id===state.host?' · organiza':''}${x.id===state.me?' · tú':''}</span></span>`).join('')}</div><div class="section-heading"><h2 class="section-title">Elegid vuestro lío.</h2><span class="count-badge">${p.length}/20 dentro</span></div><p class="section-help">${isHost()?'Elige un juego de rondas o llega a la meta en la oca.':esc(name(state.host))+' elige el juego y empieza la partida.'}</p><div class="grid">${state.modes.map((m,i)=>{const visual=gameVisuals[m.id];return `<button type="button" class="game ${state.selected===m.id?'selected':''}" data-action="select" data-mode="${m.id}" data-tone="${visual.color}" aria-pressed="${state.selected===m.id}" ${!isHost()?'disabled':''}><div class="game-visual"><span class="num">${m.min}+ personas</span><span class="selection-mark" aria-hidden="true">✓</span>${artwork(m.id,{loading:i<4?'eager':'lazy',size:320})}</div><div class="game-body"><span class="game-category">${visual.label}</span><h3>${esc(m.name)}</h3><p>${esc(m.description)}</p></div></button>`;}).join('')}</div><div class="settings"><div class="selection-summary"><strong>${esc(selected.name)}</strong><span>${selected.id==='oca'?'Hasta la meta':'10 rondas'} · ${selected.min}+ personas</span></div><div ${selected.id==='oca'?'hidden':''}><label for="level">¿Cuánto subimos el tono?</label><select id="level" ${!isHost()?'disabled':''}>${['Calentando','Salseo','Sin filtro · adulto'].map((l,i)=>`<option value="${i}" ${state.level===i?'selected':''}>${l}</option>`).join('')}</select></div>${isHost()?button(p.length<selected.min?`Faltan ${selected.min-p.length} personas`:'Vamos a jugar →','start',p.length<selected.min?'disabled':'','primary'):`<p class="waiting">Esperando a ${esc(name(state.host))}.</p>`}</div><p class="fine">Al cerrar las rondas se revelan nombres y respuestas; los matches solo se revelan si son mutuos. La sala caduca tras seis horas sin actividad.</p>`;
  }else if(state.oca){
-  app.innerHTML=header+renderOca(state,selectedOcaCell);
+  app.innerHTML=header+renderOca(state,selectedOcaCell,{zoom:ocaZoom});
  }else if(state.phase==='finished'){
   const sorted=[...p].sort((a,b)=>b.score-a.score);
   app.innerHTML=header+`<section class="round"><div class="card finish-card">${artwork('mix',{loading:'eager',size:160})}<span class="tag">10 RONDAS DESPUÉS</span><h2 class="question">Esto merecía una quedada.</h2><p>Los puntos cuentan aciertos y retos. Las confesiones y los matches se quedan fuera del marcador.</p></div><div class="results">${sorted.map((p,i)=>`<div class="result"><span>${sorted.findIndex(x=>x.score===p.score)+1}. ${esc(p.name)}</span><strong>${p.score} pt.</strong></div>`).join('')}</div><div class="actions end-actions">${isHost()?button('Elegir otro juego','lobby','','primary'):'<p>Quien organiza puede abrir otra partida.</p>'}</div></section>`;
@@ -119,6 +119,7 @@ app.addEventListener('click',async e=>{
  if(entry&&!busy){entryMode=entry.dataset.entry;updateJoinLabel();return;}
  const target=e.target.closest('[data-action]');if(!target||target.disabled)return;
  const action=target.dataset.action;
+ if(action==='oca_zoom'){ocaZoom=!ocaZoom;render();return;}
  if(action==='invite'){
   const url=location.origin+'/?sala='+state.code;
   try{if(navigator.share)await navigator.share({title:'BEBERCIULES',text:'Te estamos esperando. Entra con tu mote.',url});else{await navigator.clipboard.writeText(url);toast('Enlace copiado. Pásaselo a tu gente.');}}
