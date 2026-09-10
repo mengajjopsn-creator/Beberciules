@@ -1,15 +1,16 @@
+import {gameVisuals, artwork} from './visuals.js';
 const app=document.querySelector('#app');
 const notice=document.querySelector('#notice');
 const entrance=app.innerHTML;
-let state=null,busy=false,polling=false,noticeTimer,selectedInvite=false,networkFailures=0,timerEnding=false;
+let state=null,busy=false,polling=false,noticeTimer,selectedInvite=false,networkFailures=0,timerEnding=false,entryMode='create';
 const drafts=new Map();
 let session;
 try{session=JSON.parse(sessionStorage.getItem('beberciules-session')||'null');}catch{}
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const name=id=>state.players.find(p=>p.id===id)?.name||'Alguien que salió';
 const isHost=()=>state.me===state.host;
-const button=(label,action,extra='',cls='')=>`<button class="${cls}" data-action="${action}" ${extra}>${label}</button>`;
-const playerButton=(id)=>button(esc(name(id)),'answer',`data-value="${esc(id)}"`);
+const button=(label,action,extra='',cls='')=>`<button type="button" class="${cls}" data-action="${action}" ${extra}>${label}</button>`;
+const playerButton=(id)=>button(`<span class="avatar" aria-hidden="true">${esc(name(id).slice(0,2).toUpperCase())}</span>${esc(name(id))}`,'answer',`data-value="${esc(id)}"`);
 const roundKey=()=>state?.round?state.round.id+':'+state.round.stage:'lobby';
 function toast(text){clearTimeout(noticeTimer);notice.textContent=text;noticeTimer=setTimeout(()=>notice.textContent='',6000);}
 async function api(data=null,credentials=session){
@@ -17,22 +18,34 @@ async function api(data=null,credentials=session){
  const body=await response.json();if(!response.ok)throw Object.assign(new Error(body.error||'No se pudo conectar.'),{status:response.status});return body;
 }
 function saveSession(){sessionStorage.setItem('beberciules-session',JSON.stringify(session));}
-function showEntrance(){state=null;app.innerHTML=entrance;const form=document.querySelector('#join-form');const params=new URLSearchParams(location.search);form.code.value=params.get('sala')||'';try{form.name.value=localStorage.getItem('beberciules-name')||'';}catch{}updateJoinLabel();}
-function updateJoinLabel(){const form=document.querySelector('#join-form');if(form)form.querySelector('button').innerHTML=form.code.value.trim()?'Unirme <span>↗</span>':'Crear sala <span>↗</span>';}
+function showEntrance(){
+ state=null;app.innerHTML=entrance;
+ const form=document.querySelector('#join-form');
+ const invitation=new URLSearchParams(location.search).get('sala')||'';
+ form.code.value=invitation;entryMode=invitation?'join':'create';
+ try{form.name.value=localStorage.getItem('beberciules-name')||'';}catch{}
+ updateJoinLabel();
+}
+function updateJoinLabel(){
+ const form=document.querySelector('#join-form');if(!form)return;
+ const joining=entryMode==='join';
+ document.querySelector('#code-field').hidden=!joining;
+ form.code.required=joining;
+ document.querySelectorAll('[data-entry]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.entry===entryMode)));
+ form.querySelector('button').innerHTML=joining?'Unirme <span aria-hidden="true">↗</span>':'Crear sala <span aria-hidden="true">↗</span>';
+}
 function sync(newState){if(state&&state.version>=newState.version&&state.code===newState.code)return;state=newState;render();}
 function render(){
  const focus=document.activeElement;const field=focus?.id;const selection=focus?.selectionStart;
  const p=state.players;
- const header=`<div class="topbar"><div><p class="eyebrow">${state.phase==='lobby'?'LA GENTE VA LLEGANDO':'LO QUE PASE, SE QUEDA AQUÍ'}</p><h1>${state.phase==='lobby'?'Ya estamos dentro.':state.phase==='finished'?'Menuda previa.':esc(state.modes.find(m=>m.id===state.round?.type)?.name||'BEBERCIULES')}</h1><span class="roomcode">${esc(state.code)}</span> <span class="muted">· ${p.length}/20 personas</span></div><div class="actions">${button('Invitar','invite')}${button('Salir','leave','','secondary')}</div></div>${selectedInvite?`<div class="invite"><label for="invite-link">Comparte este enlace con tu grupo</label><input id="invite-link" readonly value="${esc(location.origin+'/?sala='+state.code)}"></div>`:''}`;
+ const header=`<div class="topbar"><div><p class="eyebrow">${state.phase==='lobby'?'VUESTRA SALA':state.phase==='finished'?'FIN DE PARTIDA':'LO QUE PASE, SE QUEDA AQUÍ'}</p><h1>${state.phase==='lobby'?'La previa está montada.':state.phase==='finished'?'Menuda previa.':esc(state.modes.find(m=>m.id===state.round?.type)?.name||'BEBERCIULES')}</h1></div><div class="room-tools"><div class="room-badge"><small>SALA</small><span class="roomcode">${esc(state.code)}</span></div><div class="actions">${button('Invitar','invite')}${button('Salir','leave','','secondary')}</div></div></div>${selectedInvite?`<div class="invite"><label for="invite-link">Comparte este enlace con tu grupo</label><input id="invite-link" readonly value="${esc(location.origin+'/?sala='+state.code)}"></div>`:''}`;
  if(state.phase==='lobby'){
   const selected=state.modes.find(m=>m.id===state.selected);
-  app.innerHTML=header+`<div class="players">${p.map(x=>`<span class="player ${x.id===state.me?'me':''}">${esc(x.name)}${x.id===state.host?' · organiza':''}${x.id===state.me?' · tú':''}</span>`).join('')}</div><h2 class="section-title">¿A qué jugamos?</h2><p>${isHost()?'Elige un juego y espera a tu gente. Son diez rondas.':esc(name(state.host))+' elige el juego. Tú ve calentando.'}</p><div class="grid">${state.modes.map((m,i)=>`<button class="game ${state.selected===m.id?'selected':''}" data-action="select" data-mode="${m.id}" aria-pressed="${state.selected===m.id}" ${!isHost()?'disabled':''}><span class="num">${String(i+1).padStart(2,'0')} / ${m.min}+ PERSONAS</span><span class="arrow">${state.selected===m.id?'✓':'↗'}</span><h3>${esc(m.name)}</h3><p>${esc(m.description)}</p></button>`).join('')}</div><div class="settings"><div><label for="level">Intensidad</label><select id="level" ${!isHost()?'disabled':''}>${['Calentando','Salseo','Sin filtro · adulto'].map((l,i)=>`<option value="${i}" ${state.level===i?'selected':''}>${l}</option>`).join('')}</select></div>${isHost()?button(p.length<selected.min?`Faltan ${selected.min-p.length} personas`:'Empezar →','start',p.length<selected.min?'disabled':'','primary'):`<p class="waiting">Esperando a que ${esc(name(state.host))} empiece.</p>`}</div><p class="fine">Pasar siempre vale. Las confesiones se muestran en conjunto; los votos de tonteo solo se revelan cuando son mutuos. Las salas caducan tras seis horas sin actividad.</p>`;
+  app.innerHTML=header+`<div class="players" aria-label="Participantes">${p.map(x=>`<span class="player ${x.id===state.me?'me':''}"><span class="avatar" aria-hidden="true">${esc(x.name.slice(0,2).toUpperCase())}</span><span>${esc(x.name)}${x.id===state.host?' · organiza':''}${x.id===state.me?' · tú':''}</span></span>`).join('')}</div><div class="section-heading"><h2 class="section-title">Elegid vuestro lío.</h2><span class="count-badge">${p.length}/20 dentro</span></div><p class="section-help">${isHost()?'Elige un juego. Diez rondas para dar que hablar.':esc(name(state.host))+' elige el juego y empieza la partida.'}</p><div class="grid">${state.modes.map((m,i)=>{const visual=gameVisuals[m.id];return `<button type="button" class="game ${state.selected===m.id?'selected':''}" data-action="select" data-mode="${m.id}" data-tone="${visual.color}" aria-pressed="${state.selected===m.id}" ${!isHost()?'disabled':''}><div class="game-visual"><span class="num">${m.min}+ personas</span><span class="selection-mark" aria-hidden="true">✓</span>${artwork(m.id,{loading:i<4?'eager':'lazy',size:320})}</div><div class="game-body"><span class="game-category">${visual.label}</span><h3>${esc(m.name)}</h3><p>${esc(m.description)}</p></div></button>`;}).join('')}</div><div class="settings"><div class="selection-summary"><strong>${esc(selected.name)}</strong><span>10 rondas · ${selected.min}+ personas</span></div><div><label for="level">¿Cuánto subimos el tono?</label><select id="level" ${!isHost()?'disabled':''}>${['Calentando','Salseo','Sin filtro · adulto'].map((l,i)=>`<option value="${i}" ${state.level===i?'selected':''}>${l}</option>`).join('')}</select></div>${isHost()?button(p.length<selected.min?`Faltan ${selected.min-p.length} personas`:'Vamos a jugar →','start',p.length<selected.min?'disabled':'','primary'):`<p class="waiting">Esperando a ${esc(name(state.host))}.</p>`}</div><p class="fine">Pasar siempre vale. Las confesiones van sin nombres; los matches solo se revelan si son mutuos. La sala caduca tras seis horas sin actividad.</p>`;
  }else if(state.phase==='finished'){
   const sorted=[...p].sort((a,b)=>b.score-a.score);
-  app.innerHTML=header+`<section class="round"><div class="card"><span class="tag">10 RONDAS DESPUÉS</span><h2 class="question">Esto merecía<br>una quedada.</h2><p>Los puntos cuentan aciertos y retos. Las confesiones y los matches se quedan fuera del marcador.</p></div><div class="results">${sorted.map((p,i)=>`<div class="result"><span>${i+1}. ${esc(p.name)}</span><strong>${p.score} pt.</strong></div>`).join('')}</div><div class="actions end-actions">${isHost()?button('Elegir otro juego','lobby','','primary'):'<p>Quien organiza puede abrir otra partida.</p>'}</div></section>`;
- }else{
-  app.innerHTML=header+renderRound();
- }
+  app.innerHTML=header+`<section class="round"><div class="card finish-card">${artwork('mix',{loading:'eager',size:160})}<span class="tag">10 RONDAS DESPUÉS</span><h2 class="question">Esto merecía una quedada.</h2><p>Los puntos cuentan aciertos y retos. Las confesiones y los matches se quedan fuera del marcador.</p></div><div class="results">${sorted.map((p,i)=>`<div class="result"><span>${i+1}. ${esc(p.name)}</span><strong>${p.score} pt.</strong></div>`).join('')}</div><div class="actions end-actions">${isHost()?button('Elegir otro juego','lobby','','primary'):'<p>Quien organiza puede abrir otra partida.</p>'}</div></section>`;
+ }else app.innerHTML=header+renderRound();
  if(field&&document.getElementById(field)&&document.getElementById(field).type!=='checkbox'){
   const target=document.getElementById(field);target.focus({preventScroll:true});if(typeof selection==='number'&&target.setSelectionRange)try{target.setSelectionRange(selection,selection);}catch{}
  }
@@ -40,7 +53,7 @@ function render(){
 }
 function answerText(label,placeholder){return `<form id="answer-form"><label for="answer-text">${label}</label><textarea id="answer-text" name="answer" maxlength="160" placeholder="${esc(placeholder)}" required>${esc(drafts.get(roundKey())||'')}</textarea><button class="primary" type="submit">Enviar en secreto →</button></form>${button('Paso','answer','data-value="pass"','secondary skip')}`;}
 function renderRound(){
- const r=state.round,actor=r.actor===state.me;
+ const r=state.round,actor=r.actor===state.me,visual=gameVisuals[r.type];
  const progress=`<div class="round-meta"><span>RONDA ${state.roundNumber} / 10</span><span>${r.stage==='results'?'Resultado':r.submittedCount+' / '+r.expectedCount+' respuestas'}</span></div>`;
  let instructions='',question=r.prompt||'La pregunta está bajo llave.',content='';
  if(r.type==='paranoia'){instructions=actor?'Elige en secreto. Una moneda decidirá si se revela la pregunta.':'Solo una persona conoce la pregunta. Después veremos a quién ha elegido.';}
@@ -73,7 +86,7 @@ function renderRound(){
  let hostActions='';
  if(isHost())hostActions=`<div class="actions end-actions">${r.stage==='results'?button(state.roundNumber===10?'Ver cierre →':'Siguiente ronda →','next','','primary'):r.stage!=='perform'?button('Cerrar turno','reveal','','secondary'):''}${button('Cambiar de juego','lobby','','secondary')}</div>`;
  else if(r.stage==='results')hostActions=`<p class="waiting">${esc(name(state.host))} pasa a la siguiente ronda.</p>`;
- return `<section class="round">${progress}<div class="card"><span class="tag">${r.stage==='results'?'AHORA SE SABE':actor&&['paranoia','bluff','speed','defend'].includes(r.type)?'TE TOCA':'SIN PRISAS, SIN PRESIÓN'}</span><h2 class="question">${esc(question)}</h2><p>${esc(instructions)}</p></div>${content}${hostActions}</section>`;
+ return `<section class="round">${progress}<div class="round-track" aria-hidden="true">${Array.from({length:10},(_,i)=>`<span class="${i+1<state.roundNumber?'complete':i+1===state.roundNumber?'current':''}"></span>`).join('')}</div><div class="card prompt-card" data-tone="${visual.color}"><div class="prompt-header"><div><span class="tag">${r.stage==='results'?'AHORA SE SABE':actor&&['paranoia','bluff','speed','defend'].includes(r.type)?'TE TOCA':'VAMOS ALLÁ'}</span><span class="round-kind">${visual.label}</span></div>${artwork(r.type,{className:'prompt-art',loading:'eager',size:160})}</div><h2 class="question">${esc(question)}</h2><p>${esc(instructions)}</p></div>${content}${hostActions}</section>`;
 }
 function renderResults(r){
  const result=r.result;if(result.skipped)return '<div class="waiting">Ronda pasada. Vamos a por otra.</div>';
@@ -97,7 +110,7 @@ app.addEventListener('submit',async e=>{
  e.preventDefault();if(busy)return;
  if(e.target.id==='join-form'){
   busy=true;const form=e.target;const data=new FormData(form);form.querySelector('button').disabled=true;
-  const credentials={token:crypto.randomUUID()+crypto.randomUUID(),code:String(data.get('code')).trim().toUpperCase()};
+  const credentials={token:crypto.randomUUID()+crypto.randomUUID(),code:entryMode==='join'?String(data.get('code')).trim().toUpperCase():''};
   try{const joined=await api({action:credentials.code?'join':'create',name:data.get('name'),adult:data.get('adult')==='on'},credentials);session={...credentials,code:joined.code};saveSession();try{localStorage.setItem('beberciules-name',data.get('name'));}catch{}history.replaceState(null,'','/?sala='+joined.code);state=joined;render();}
   catch(error){toast(error.message);form.querySelector('button').disabled=false;}
   finally{busy=false;}
@@ -106,6 +119,8 @@ app.addEventListener('submit',async e=>{
 app.addEventListener('input',e=>{if(e.target.id==='code')updateJoinLabel();if(e.target.id==='answer-text')drafts.set(roundKey(),e.target.value);});
 app.addEventListener('change',e=>{if(e.target.id==='level')perform('select',{mode:state.selected,level:Number(e.target.value)});});
 app.addEventListener('click',async e=>{
+ const entry=e.target.closest('[data-entry]');
+ if(entry&&!busy){entryMode=entry.dataset.entry;updateJoinLabel();return;}
  const target=e.target.closest('[data-action]');if(!target||target.disabled)return;
  const action=target.dataset.action;
  if(action==='invite'){

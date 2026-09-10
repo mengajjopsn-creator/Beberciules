@@ -1,0 +1,72 @@
+{
+  "brand": "BEBERCIULES",
+  "processing": "Downscaled and encoded with Sharp; no generative edits during optimization.",
+  "assets": [
+    {
+      "id": "logo",
+      "path": "public/assets/brand/logo.png",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: logo-brand\nAsset type: separate square bitmap website asset for BEBERCIULES, an adults' party game. Create just this one image, not a grid.\nSubject: A distinctive simple capital B silhouette cleverly made from two clinking drinks/tumblers with a tiny sparkle, primarily lime, ultra legible as favicon. Flat minimal logo-brand rather than detailed 3D. The B is a symbol silhouette, with no wordmark.\nStyle/medium: Flat minimal bold graphic logo.\nColor palette: punchy lime #c3f85c, violet #9570ff, pink #ff71ad, dark near-black #121018 background.\nComposition/framing: centered isolated composition with generous 15% safe margins, square 1:1 canvas.\nLighting/mood: subtle studio shadows, crisp polished playful finish.\nConstraints: no letters (except the requested B-shaped logo silhouette), no numbers, no text, no watermark, no people, no city references, no explicit sexual imagery. Not an interface screenshot."
+    },
+    {
+      "id": "mix",
+      "path": "public/assets/games/mix.webp",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: separate square bitmap website asset for BEBERCIULES, an adults' party game. Create just this one image, not a grid.\nSubject: Two clinking party tumblers and floating dice/confetti.\nStyle/medium: Premium playful 3D clay/plastic party-game collectible, clean bold silhouettes.\nColor palette: punchy lime #c3f85c, violet #9570ff, pink #ff71ad, dark near-black #121018 background.\nComposition/framing: centered isolated composition with generous 15% safe margins, square 1:1 canvas.\nLighting/mood: subtle studio shadows, crisp polished playful finish.\nConstraints: no letters (except the requested B-shaped logo silhouette), no numbers, no text, no watermark, no people, no city references, no explicit sexual imagery. Not an interface screenshot."
+    },
+    {
+      "id": "vote",
+      "path": "public/assets/games/vote.webp",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: separate square bitmap website asset for BEBERCIULES, an adults' party game. Create just this one image, not a grid.\nSubject: A stylized disembodied toy hand pointing toward a small spotlight/star target.\nStyle/medium: Premium playful 3D clay/plastic party-game collectible, clean bold silhouettes.\nColor palette: punchy lime #c3f85c, violet #9570ff, pink #ff71ad, dark near-black #121018 background.\nComposition/framing: centered isolated composition with generous 15% safe margins, square 1:1 canvas.\nLighting/mood: subtle studio shadows, crisp polished playful finish.\nConstraints: no letters (except the requested B-shaped logo silhouette), no numbers, no text, no watermark, no people, no city references, no explicit sexual imagery. Not an interface screenshot."
+    },
+    {
+      "id": "paranoia",
+      "path": "public/assets/games/paranoia.webp",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: separate square bitmap website asset for BEBERCIULES, an adults' party game. Create just this one image, not a grid.\nSubject: A sealed violet envelope with a lime padlock and small question-symbol-like abstract intrigue, no literal text.\nStyle/medium: Premium playful 3D clay/plastic party-game collectible, clean bold silhouettes.\nColor palette: punchy lime #c3f85c, violet #9570ff, pink #ff71ad, dark near-black #121018 background.\nComposition/framing: centered isolated composition with generous 15% safe margins, square 1:1 canvas.\nLighting/mood: subtle studio shadows, crisp polished playful finish.\nConstraints: no letters (except the requested B-shaped logo silhouette), no numbers, no text, no watermark, no people, no city references, no explicit sexual imagery. Not an interface screenshot."
+    },
+    {
+      "id": "faker",
+      "path": "public/assets/games/faker.webp",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: separate square bitmap website asset for BEBERCIULES, an adults' party game. Create just this one image, not a grid.\nSubject: A theatrical violet eye mask with a lime magnifying glass.\nStyle/medium: Premium playful 3D clay/plastic party-game collectible, clean bold silhouettes.\nColor palette: punchy lime #c3f85c, violet #9570ff, pink #ff71ad, dark near-black #121018 background.\nComposition/framing: centered isolated composition with generous 15% safe margins, square 1:1 canvas.\nLighting/mood: subtle studio shadows, crisp polished playful finish.\nConstraints: no letters (except the requested B-shaped logo silhouette), no numbers, no text, no watermark, no people, no city references, no explicit sexual imagery. Not an interface screenshot."
+    },
+    {
+      "id": "bluff",
+      "path": "public/assets/games/bluff.webp",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: separate square bitmap website asset for BEBERCIULES, an adults' party game. Create just this one image, not a grid.\nSubject: Three chunky playing cards with speech bubbles and a playful long-nose mask motif.\nStyle/medium: Premium playful 3D clay/plastic party-game collectible, clean bold silhouettes.\nColor palette: punchy lime #c3f85c, violet #9570ff, pink #ff71ad, dark near-black #121018 background.\nComposition/framing: centered isolated composition with generous 15% safe margins, square 1:1 canvas.\nLighting/mood: subtle studio shadows, crisp polished playful finish.\nConstraints: no letters (except the requested B-shaped logo silhouette), no numbers, no text, no watermark, no people, no city references, no explicit sexual imagery. Not an interface screenshot."
+    },
+    {
+      "id": "speed",
+      "path": "public/assets/games/speed.webp",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: separate square bitmap website asset for BEBERCIULES, an adults' party game. Create just this one image, not a grid.\nSubject: A bold lime stopwatch with violet lightning.\nStyle/medium: Premium playful 3D clay/plastic party-game collectible, clean bold silhouettes.\nColor palette: punchy lime #c3f85c, violet #9570ff, pink #ff71ad, dark near-black #121018 background.\nComposition/framing: centered isolated composition with generous 15% safe margins, square 1:1 canvas.\nLighting/mood: subtle studio shadows, crisp polished playful finish.\nConstraints: no letters (except the requested B-shaped logo silhouette), no numbers, no text, no watermark, no people, no city references, no explicit sexual imagery. Not an interface screenshot."
+    },
+    {
+      "id": "match",
+      "path": "public/assets/games/match.webp",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: separate square bitmap website asset for BEBERCIULES, an adults' party game. Create just this one image, not a grid.\nSubject: Two glossy pink hearts connected by a lime spark.\nStyle/medium: Premium playful 3D clay/plastic party-game collectible, clean bold silhouettes.\nColor palette: punchy lime #c3f85c, violet #9570ff, pink #ff71ad, dark near-black #121018 background.\nComposition/framing: centered isolated composition with generous 15% safe margins, square 1:1 canvas.\nLighting/mood: subtle studio shadows, crisp polished playful finish.\nConstraints: no letters (except the requested B-shaped logo silhouette), no numbers, no text, no watermark, no people, no city references, no explicit sexual imagery. Not an interface screenshot."
+    },
+    {
+      "id": "never",
+      "path": "public/assets/games/never.webp",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: separate square bitmap website asset for BEBERCIULES, an adults' party game. Create just this one image, not a grid.\nSubject: A violet speech bubble with three lime dots and a pink zipped-lips symbol.\nStyle/medium: Premium playful 3D clay/plastic party-game collectible, clean bold silhouettes.\nColor palette: punchy lime #c3f85c, violet #9570ff, pink #ff71ad, dark near-black #121018 background.\nComposition/framing: centered isolated composition with generous 15% safe margins, square 1:1 canvas.\nLighting/mood: subtle studio shadows, crisp polished playful finish.\nConstraints: no letters (except the requested B-shaped logo silhouette), no numbers, no text, no watermark, no people, no city references, no explicit sexual imagery. Not an interface screenshot."
+    },
+    {
+      "id": "ten",
+      "path": "public/assets/games/ten.webp",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: separate square bitmap website asset for BEBERCIULES, an adults' party game. Create just this one image, not a grid.\nSubject: A glossy lime star on a violet rating pedestal with pink mini stars, no digits.\nStyle/medium: Premium playful 3D clay/plastic party-game collectible, clean bold silhouettes.\nColor palette: punchy lime #c3f85c, violet #9570ff, pink #ff71ad, dark near-black #121018 background.\nComposition/framing: centered isolated composition with generous 15% safe margins, square 1:1 canvas.\nLighting/mood: subtle studio shadows, crisp polished playful finish.\nConstraints: no letters, no numbers, no text, no watermark, no people, no city references, no explicit sexual imagery. Not an interface screenshot."
+    },
+    {
+      "id": "defend",
+      "path": "public/assets/games/defend.webp",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: separate square bitmap website asset for BEBERCIULES, an adults' party game. Create just this one image, not a grid.\nSubject: A pink flag planted on a violet podium with a lime microphone.\nStyle/medium: Premium playful 3D clay/plastic party-game collectible, clean bold silhouettes.\nColor palette: punchy lime #c3f85c, violet #9570ff, pink #ff71ad, dark near-black #121018 background.\nComposition/framing: centered isolated composition with generous 15% safe margins, square 1:1 canvas.\nLighting/mood: subtle studio shadows, crisp polished playful finish.\nConstraints: no letters, no numbers, no text, no watermark, no people, no city references, no explicit sexual imagery. Not an interface screenshot."
+    }
+  ]
+}

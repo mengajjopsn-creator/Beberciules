@@ -1,12 +1,51 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#161616"><meta name="description" content="Tu gente, vuestros secretos. Diez juegos para la previa, cada uno desde su móvil.">
-  <title>BEBERCIULES · Se queda aquí</title><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css">
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#121018">
+ <meta name="description" content="Tu gente, vuestros secretos. Diez juegos para la previa, cada uno desde su móvil.">
+ <title>BEBERCIULES · Se queda aquí</title>
+ <link rel="icon" href="/favicon-32.png?v=2" type="image/png" sizes="32x32">
+ <link rel="icon" href="/favicon-192.png?v=2" type="image/png" sizes="192x192">
+ <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" sizes="180x180">
+ <link rel="stylesheet" href="/style.css">
 </head>
-<body><header><a href="/" class="logo" aria-label="BEBERCIULES, inicio">BEBERCIULES</a><span class="edition">SE QUEDA AQUÍ</span><span class="age">18+</span></header>
-<main id="app"><section class="entrance"><p class="eyebrow">EL PLAN EMPIEZA AQUÍ</p><h1>Tu gente.<br>Mucho <em>salseo.</em></h1><p>Entra con tu mote. Lo que pase, se queda aquí.</p><form id="join-form"><label for="name">¿Cómo te llamamos?</label><input id="name" name="name" maxlength="24" autocomplete="nickname" placeholder="Tu nombre o mote" required><label for="code">Código de sala <small>si ya hay una montada</small></label><input id="code" name="code" maxlength="6" placeholder="Ej. A7F2B9" autocapitalize="characters" autocomplete="off"><label class="check"><input name="adult" type="checkbox" required> Tengo 18 años o más.</label><button class="primary" type="submit">Crear sala <span>↗</span></button></form><p class="fine">Cada uno con su móvil. Pasar siempre vale.<br>Jugad con puntos o con vuestra bebida, a vuestro ritmo.</p></section></main>
-<div id="notice" role="status" aria-live="polite"></div><footer>SE QUEDA AQUÍ. <span>BEBERCIULES / VOL. 01</span></footer><script type="module" src="/app.js"></script></body></html>
-
-
+<body>
+ <header class="site-header">
+  <a href="/" class="logo" aria-label="BEBERCIULES, inicio"><img src="/assets/brand/logo-96.png" width="40" height="40" alt=""><span>BEBERCIULES</span></a>
+  <span class="age">18+</span>
+ </header>
+ <main id="app">
+  <section class="entrance">
+   <div class="entry-heading">
+    <div><p class="eyebrow">LA NOCHE ES VUESTRA</p><h1>Tu gente.<br>Sin <em>guion.</em></h1></div>
+    <img class="entry-mark" src="/assets/brand/logo-256.png" width="112" height="112" alt="Logo de BEBERCIULES" fetchpriority="high">
+   </div>
+   <p class="entry-description">Los secretos, las risas y el tonteo los ponéis vosotros.</p>
+   <div class="entry-panel">
+    <div class="entry-switch" role="group" aria-label="Cómo entrar a jugar">
+     <button type="button" data-entry="create" aria-pressed="true">Crear sala</button>
+     <button type="button" data-entry="join" aria-pressed="false">Unirme</button>
+    </div>
+    <form id="join-form">
+     <label for="name">Tu nombre o mote</label>
+     <input id="name" name="name" maxlength="24" autocomplete="nickname" placeholder="Como te llama tu gente" required>
+     <div id="code-field" hidden>
+      <label for="code">Código de sala</label>
+      <input id="code" name="code" maxlength="6" minlength="6" pattern="[a-fA-F0-9]{6}" placeholder="A7F2B9" autocapitalize="characters" autocomplete="off" spellcheck="false" aria-describedby="code-help">
+      <p id="code-help" class="field-help">Pídeselo a quien haya creado la sala.</p>
+     </div>
+     <label class="check"><input name="adult" type="checkbox" required> Tengo 18 años o más.</label>
+     <button class="primary entry-submit" type="submit">Crear sala <span aria-hidden="true">↗</span></button>
+    </form>
+   </div>
+   <div class="entry-summary"><span>10 juegos</span><span>2–20 personas</span><span>Cada uno con su móvil</span></div>
+   <p class="fine">Pasar siempre vale. Con puntos o con vuestra bebida, a vuestro ritmo.</p>
+  </section>
+ </main>
+ <div id="notice" role="status" aria-live="polite"></div>
+ <footer><span>LO QUE PASE, SE QUEDA AQUÍ.</span><span>BEBERCIULES</span></footer>
+ <script type="module" src="/app.js"></script>
+</body>
+</html>

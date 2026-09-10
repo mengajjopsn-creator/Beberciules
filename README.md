@@ -81,3 +81,11 @@ Las pruebas de integración locales usan almacenamiento en memoria con control d
 
 Referencias oficiales: https://vercel.com/docs/functions/runtimes/node-js , https://supabase.com/docs/guides/getting-started/api-keys , https://supabase.com/docs/guides/database/functions .
 
+
+## Identidad visual
+
+Logo propio: una B formada por dos vasos brindando, en verde lima, violeta y rosa. Se usa en la cabecera, la entrada y los favicons PNG/ICO; también se incluye un icono Apple Touch. El logo original está en `public/assets/brand/logo.png`.
+
+Cada juego tiene una ilustración 3D original en `public/assets/games/`. Se reutiliza en sus preguntas y retos para reconocer la modalidad; no se genera una imagen por cada pregunta de la batería. Las diez imágenes WebP suman aproximadamente 184 KB, y las tarjetas fuera de la primera pantalla usan carga diferida. Los prompts y archivos están documentados en `docs/visual-assets.json`; se usó la herramienta integrada de generación de imágenes.
+
+La interfaz permite elegir claramente entre crear sala y unirse, muestra participantes con iniciales, tarjetas ilustradas, el juego seleccionado junto al botón de inicio, progreso de diez rondas y controles adaptados al móvil.
