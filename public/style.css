@@ -6,3 +6,5 @@
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.entry-mark{transform:none}}
 
 
+
+.result-detail{align-items:flex-start}.result-detail>strong{flex:0 1 55%;min-width:0;overflow-wrap:anywhere;text-align:right}.results+.results{margin-top:9px}@media(max-width:480px){.result-detail{flex-direction:column;gap:6px}.result-detail>strong{flex:auto;max-width:100%;text-align:left}}

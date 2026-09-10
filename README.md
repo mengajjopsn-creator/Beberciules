@@ -28,14 +28,14 @@ La sincronización se consulta cada 2,5 segundos con la pestaña visible. Son pe
 | Nombre | Mecánica |
 | --- | --- |
 | Modo previa | Mezcla aleatoria de los modos disponibles según el grupo. |
-| El señalado | Votos secretos y recuento por persona. |
+| El señalado | Votos ocultos hasta el cierre; se revelan destinatarios, votantes y empates. |
 | Bajo cuerda | Solo quien tiene turno recibe la pregunta; el servidor sortea si la revela al grupo. |
 | El infiltrado | Una persona responde sin conocer la pregunta; después todos votan. |
 | Mucho cuento | Una respuesta verdadera, mentiras del grupo y votación. |
 | Sin pensarlo | Tres respuestas en ocho segundos; el grupo juzga. |
 | Cruce de miradas | Elecciones secretas; solo se revelan coincidencias mutuas. |
-| Aquí se confiesa | 350 preguntas adaptadas de la batería original. Totales anónimos de sí, no y paso. |
-| Tiene un pero | Notas de cero a diez y media del grupo. |
+| Aquí se confiesa | 350 preguntas adaptadas de la batería original. Nombres agrupados por sí, no y paso; ausencias separadas. |
+| Tiene un pero | Notas individuales de cero a diez y media del grupo. |
 | Defiende lo indefendible | Quince segundos para defender una red flag; después votación. |
 
 Las rondas de habilidad y deducción dan puntos. Confesiones, matches y señalamientos no premian ni penalizan experiencias personales. No hay penalización por pasar ni obligación de beber.
