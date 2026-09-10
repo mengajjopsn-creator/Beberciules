@@ -61,7 +61,7 @@ npm test
 npm run build
 ```
 
-Abre http://localhost:3000. Sin `.env`, el servidor local conserva salas en memoria mientras está encendido. Puedes jugar desde móviles en la misma Wi-Fi usando la dirección local del ordenador si el firewall lo permite. En producción **nunca** se usa memoria como sustituto de Supabase: una configuración incompleta muestra un error explícito.
+Abre http://localhost:3000. Sin `.env`, el servidor local conserva salas en memoria mientras está encendido. Para probar desde móviles, usa el despliegue HTTPS de Vercel: las sesiones utilizan las funciones criptográficas del navegador que requieren un contexto seguro. En producción **nunca** se usa memoria como sustituto de Supabase: una configuración incompleta muestra un error explícito.
 
 Para probar la base de datos real, copia `.env.example` como `.env` y rellena las dos variables. No subas `.env` al repositorio.
 
@@ -80,3 +80,4 @@ Las pruebas de integración locales usan almacenamiento en memoria con control d
 - **Web antigua:** revisa que el último commit haya terminado de desplegar y recarga la página.
 
 Referencias oficiales: https://vercel.com/docs/functions/runtimes/node-js , https://supabase.com/docs/guides/getting-started/api-keys , https://supabase.com/docs/guides/database/functions .
+
