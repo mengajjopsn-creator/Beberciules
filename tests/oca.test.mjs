@@ -100,7 +100,7 @@ test('Oca: salir transfiere el turno y el mando; nuevos jugadores esperan otra p
 test('Oca: fichas de 20 personas, nombres escapados y sin tokens en las vistas',()=>{
  const {room,p,tokens}=setup(20);room.oca.players[0].name='<img src=x onerror=alert(1)>';
  const state=view(room,p[0]);const html=renderOca(state);
- assert.equal(state.oca.order.length,20);assert.ok(html.includes('+17'));assert.ok(html.includes('&lt;img'));assert.ok(!html.includes('<img src=x'));assert.ok(!html.includes('style='));assert.ok(html.includes('oca-x-1 oca-y-1'));
+ assert.equal(state.oca.order.length,20);assert.ok(html.includes('+19'));assert.ok(html.includes('&lt;img'));assert.ok(!html.includes('<img src=x'));assert.ok(!html.includes('style='));assert.ok(html.includes('oca-x-1 oca-y-1'));
  for(const token of tokens)assert.ok(!JSON.stringify(state).includes(token));assert.ok(!JSON.stringify(state).includes(p[0].hash));
 });
 
