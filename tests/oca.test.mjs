@@ -22,6 +22,19 @@ test('Oca: salida, 50 pruebas y meta forman una espiral continua, con todas las 
  assert.ok(ocaCells.every(c=>c.text&&c.title));assert.equal(ocaCells[31].skip,1);assert.equal(ocaCells[47].goto,undefined);
 });
 
+test('Oca: el camino dibujado abre paso entre casillas consecutivas y cierra los laterales',()=>{
+ const {room,p}=setup();const html=renderOca(view(room,p[0]));const coords=boardCoordinates();
+ for(let i=0;i<coords.length;i++){
+  const cell=html.match(new RegExp('<button[^>]+class="([^"]+)"[^>]+data-cell="'+i+'"'));
+  assert.ok(cell);const [x,y]=coords[i];const neighbors=[coords[i-1],coords[i+1]].filter(Boolean);
+  for(const [side,dx,dy]of [['left',-1,0],['right',1,0],['top',0,-1],['bottom',0,1]]){
+   const isPassage=neighbors.some(([nx,ny])=>nx===x+dx&&ny===y+dy);
+   assert.equal(cell[1].includes('oca-wall-'+side),!isPassage,`Casilla ${i}, ${side}`);
+  }
+ }
+ assert.ok(html.includes('class="oca-route"'));assert.ok(html.includes('/assets/oca/pawn.webp'));
+});
+
 test('Oca: solo quien tiene turno tira, el dado viene del servidor y no admite doble tirada',()=>{
  const {room,p}=setup();assert.equal(room.phase,'board');assert.equal(room.round,null);
  assert.equal(view(room,p[0]).oca.canRoll,true);assert.equal(view(room,p[1]).oca.canRoll,false);

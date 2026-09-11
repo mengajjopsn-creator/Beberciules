@@ -73,6 +73,18 @@
       "path": "public/assets/games/oca.webp",
       "tool": "built-in image_gen",
       "prompt": "Square standalone in-page illustration for BEBERCIULES La oca: stylized white goose, lime green and lilac board-game pawns and exactly one die. Sophisticated playful 3D clay, near-black #121018 background, lime #c3f85c, violet #a68aff, pink #ff8cbc accent. Compact centered composition, comfortable margins, soft studio lighting. No text, logos, watermarks, UI or drinking depiction. One image."
+    },
+    {
+      "id": "oca-pawn",
+      "path": "public/assets/oca/pawn.webp",
+      "tool": "built-in image_gen",
+      "prompt": "Photorealistic single lime-green glossy resin Ludo pawn with spherical head, narrow neck, flared circular foot. Three-quarter view slightly from above; studio light upper left, convincing highlights and volume. Full pawn fills 80% of square frame. Genuinely transparent alpha background, subtle contact shadow only, no floor, no text, no extra objects."
+    },
+    {
+      "id": "oca-wood",
+      "path": "public/assets/oca/wood.webp",
+      "tool": "built-in image_gen",
+      "prompt": "Square photorealistic walnut/oak tabletop wood material texture. Top-down orthographic macro, warm medium brown, subtle fine grain uniform across frame. Even diffuse light. No objects, text, border or perspective distortion."
     }
   ]
 }

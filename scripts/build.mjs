@@ -11,5 +11,9 @@ for(const mode of modes){
  if(file.toString('ascii',0,4)!=='RIFF'||file.toString('ascii',8,12)!=='WEBP')throw new Error('Ilustración no válida: '+mode.id);
 }
 if(!html.includes('BEBERCIULES'))throw new Error('Falta el nombre de la aplicación.');
+for(const asset of ['pawn','wood']){
+ const file=await readFile('public/assets/oca/'+asset+'.webp');
+ if(file.toString('ascii',0,4)!=='RIFF'||file.toString('ascii',8,12)!=='WEBP')throw new Error('Recurso de oca no válido: '+asset);
+}
 await mkdir('dist',{recursive:true});await cp('public','dist',{recursive:true});
 console.log('BEBERCIULES: sintaxis, logo, favicons y las 11 ilustraciones comprobados. Web preparada en dist/; API en api/.');
