@@ -85,6 +85,12 @@
       "path": "public/assets/oca/wood.webp",
       "tool": "built-in image_gen",
       "prompt": "Square photorealistic walnut/oak tabletop wood material texture. Top-down orthographic macro, warm medium brown, subtle fine grain uniform across frame. Even diffuse light. No objects, text, border or perspective distortion."
+    },
+    {
+      "id": "oca-board-photo",
+      "path": "public/assets/oca/board-photo.webp",
+      "tool": "built-in image_gen",
+      "prompt": "True overhead orthographic product photograph of a real square folding board game resting on warm medium-brown wooden table. Square blank ivory/tan matte cardboard playing surface inset6% from frame, aligned axes, no perspective skew. Subtle paper fibers, restrained worn corners, thin rolled cardboard edge and gentle center fold. Diffuse window light upper left, realistic contact shadow down-right. Premium tactile photography, natural restrained tones. No grid, numbers, path, text, illustrations, pawns, dice or decorative props."
     }
   ]
 }
